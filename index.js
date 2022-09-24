@@ -1,15 +1,15 @@
 require('log-timestamp');
 const axios = require('axios')
 
-const sleep = (i) => new Promise((res, rej) => setTimeout(res, i * 1000));
+const sleep = (i) => new Promise((res, rej) => setTimeout(res, i));
 
 let url = 'http://hub.jadepool.io:7001/api/v2/s/wallets/alex_test/tokens/ETH/withdraw?appid=sudo';
 
 async function main () {
-    for(let i = 1;i <= 100 - 4; i++) {
+    for(let i = 1;i <= 100000; i++) {
         result = await withdraw();
-        console.log(result.data.code);
-        await sleep(1);
+        console.log(i, ": ",result.data.code);
+        await sleep(200);
     }
 }
 

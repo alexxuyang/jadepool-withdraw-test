@@ -3,13 +3,21 @@ const axios = require('axios')
 
 const sleep = (i) => new Promise((res, rej) => setTimeout(res, i));
 
-let url = 'http://hub.jadepool.io:7001/api/v2/s/wallets/hsa_test/tokens/ETH/withdraw?appid=sudo';
+let url = 'http://43.153.170.187:7001/api/v2/s/wallets/hsa10/tokens/ETH/withdraw?appid=sudo';
 
 async function main () {
-    for(let i = 1;i <= 2; i++) {
+    for(let i = 1;i <= 10; i++) {
         result = await withdraw();
-        console.log(i, result.data.code);
-        await sleep(200);
+
+        let code = result.data.code;
+
+        if(code != 0) {
+            console.log(i, code);
+        } else if(i % 5 == 1) {
+            console.log(i, code);
+        }
+
+        await sleep(1);
     }
 }
 
